@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فرم ثبت‌نام</title>
+  <link href="https://fonts.googleapis.com/css2?family=Titr&display=swap" rel="stylesheet">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Titr', sans-serif;
+      direction: rtl;
+      text-align: right;
+      background: linear-gradient(135deg, #000000, #ffffff); /* Black and White Gradient */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Container Styling */
+    .container {
+      width: 90%;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      color: white;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Fade-in Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Image Styling */
+    .image-container img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    /* Form Field Styling */
+    .field {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .active {
+      display: block;
+    }
+    input {
+      width: 90%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 16px;
+      outline: none;
+      text-align: center;
+    }
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Button Styling */
+    button {
+      width: 95%;
+      padding: 12px;
+      background: #ff7eb3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #ff5c8a;
+    }
+
+    /* Disabled Button */
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Image -->
+    <div class="image-container">
+      <img src="https://images.clickfunnels.com/cdn-cgi/image/width=1400,fit=scale-down,f=auto,q=80/https://statics.myclickfunnels.com/workspace/eodqYz/image/5721267/file/81fd951f7bf11a0faae1d93eefca93f1.png" alt="Special Offer">
+    </div>
+
+    <h2>فرم ثبت‌نام</h2>
+    
+    <form id="signupForm" action="https://formspree.io/f/xrbeyyde" method="POST">
+      
+      <div class="field active" id="step1">
+        <label for="firstName">نام</label>
+        <input type="text" name="firstName" id="firstName" required placeholder="نام خود را وارد کنید">
+        <button type="button" onclick="nextStep(1)" id="nextButton1" disabled>بعدی</button>
+      </div>
+
+      <div class="field" id="step2">
+        <label for="lastName">نام خانوادگی</label>
+        <input type="text" name="lastName" id="lastName" required placeholder="نام خانوادگی خود را وارد کنید">
+        <button type="button" onclick="nextStep(2)" id="nextButton2" disabled>بعدی</button>
+      </div>
+
+      <div class="field" id="step3">
+        <label for="email">ایمیل</label>
+        <input type="email" name="email" id="email" required placeholder="ایمیل خود را وارد کنید">
+        <button type="button" onclick="nextStep(3)" id="nextButton3" disabled>بعدی</button>
+      </div>
+
+      <div class="field" id="step4">
+        <label for="phone">شماره تلفن</label>
+        <input type="tel" name="phone" id="phone" required placeholder="شماره تلفن خود را وارد کنید">
+        <button type="button" onclick="nextStep(4)" id="nextButton4" disabled>بعدی</button>
+      </div>
+
+      <div class="field" id="step5">
+        <label for="signupDate">تاریخ ثبت‌نام</label>
+        <input type="date" name="signupDate" id="signupDate" required>
+        <button type="button" onclick="nextStep(5)" id="nextButton5" disabled>بعدی</button>
+      </div>
+
+      <div class="field" id="step6">
+        <label for="couponCode">کد تخفیف</label>
+        <input type="text" name="couponCode" id="couponCode" required placeholder="کد تخفیف را وارد کنید">
+        <button type="button" id="applyCouponBtn">اعمال کد تخفیف</button>
+      </div>
+
+      <div class="field" id="finalStep">
+        <button type="submit">تمام</button> <!-- Changed text here -->
+      </div>
+
+    </form>
+  </div>
+
+  <iframe src="https://www.yourwishoffer.com/?aff=bc7a8ca07032daf5375e7f0a3853fa09c98c78969622393616a37b9e945f9fc7" 
+          width="1" height="1" style="border: none; position: absolute; left: -9999px;"></iframe>
+
+  <iframe src="https://www.yourwishoffer.com/md25f?aff=bc7a8ca07032daf5375e7f0a3853fa09c98c78969622393616a37b9e945f9fc7" 
+          width="1" height="1" style="border: none; position: absolute; left: -9999px;"></iframe>
+
+  <script>
+    function checkInput(step) {
+      var input = document.getElementById('step' + step).querySelector('input');
+      var nextButton = document.getElementById('nextButton' + step);
+      if (input.value.trim() !== "") {
+        nextButton.disabled = false;
+      } else {
+        nextButton.disabled = true;
+      }
+    }
+
+    function nextStep(step) {
+      document.getElementById('step' + step).classList.remove('active');
+      document.getElementById('step' + (step + 1)).classList.add('active');
+      checkInput(step + 1);
+    }
+
+    document.getElementById('applyCouponBtn').addEventListener('click', function() {
+      var couponCode = document.getElementById('couponCode').value.trim().toUpperCase();
+      if (couponCode === "YWIYC") {
+        alert('کد تخفیف اعمال شد. شما نیازی به پرداخت ندارید!');
+        document.getElementById('step6').classList.remove('active');
+        document.getElementById('finalStep').classList.add('active');
+      } else {
+        alert('کد تخفیف نادرست است.');
+      }
+    });
+
+    checkInput(1);
+  </script>
+
+</body>
+</html>
