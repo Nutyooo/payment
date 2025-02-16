@@ -11,7 +11,7 @@
       font-family: 'Titr', sans-serif;
       direction: rtl;
       text-align: right;
-      background: linear-gradient(135deg, #000000, #ffffff); /* Black and White Gradient */
+      background: linear-gradient(135deg, #000000, #ffffff);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -138,52 +138,53 @@
 
       <div class="field" id="step6">
         <label for="couponCode">کد تخفیف</label>
-        <input type="text" name="couponCode" id="couponCode" required placeholder="کد تخفیف را وارد کنید">
+        <input type="text" name="couponCode" id="couponCode" placeholder="کد تخفیف را وارد کنید">
+        <button type="button" onclick="nextStep(6)">رد شدن</button>
         <button type="button" id="applyCouponBtn">اعمال کد تخفیف</button>
       </div>
 
       <div class="field" id="finalStep">
-        <button type="submit">تمام</button> <!-- Changed text here -->
+        <button type="submit">تمام</button>
       </div>
 
     </form>
   </div>
 
-  <iframe src="https://www.yourwishoffer.com/?aff=bc7a8ca07032daf5375e7f0a3853fa09c98c78969622393616a37b9e945f9fc7" 
-          width="1" height="1" style="border: none; position: absolute; left: -9999px;"></iframe>
-
-  <iframe src="https://www.yourwishoffer.com/md25f?aff=bc7a8ca07032daf5375e7f0a3853fa09c98c78969622393616a37b9e945f9fc7" 
-          width="1" height="1" style="border: none; position: absolute; left: -9999px;"></iframe>
-
   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      for (let i = 1; i <= 5; i++) {
+        let input = document.getElementById('step' + i).querySelector('input');
+        input.addEventListener("input", function() {
+          checkInput(i);
+        });
+      }
+    });
+
     function checkInput(step) {
       var input = document.getElementById('step' + step).querySelector('input');
       var nextButton = document.getElementById('nextButton' + step);
-      if (input.value.trim() !== "") {
-        nextButton.disabled = false;
-      } else {
-        nextButton.disabled = true;
-      }
+      nextButton.disabled = input.value.trim() === "";
     }
 
     function nextStep(step) {
-      document.getElementById('step' + step).classList.remove('active');
-      document.getElementById('step' + (step + 1)).classList.add('active');
-      checkInput(step + 1);
+      var input = document.getElementById('step' + step).querySelector('input');
+      if (input.value.trim() !== "" || step === 6) {
+        document.getElementById('step' + step).classList.remove('active');
+        document.getElementById('step' + (step + 1)).classList.add('active');
+      }
     }
 
     document.getElementById('applyCouponBtn').addEventListener('click', function() {
       var couponCode = document.getElementById('couponCode').value.trim().toUpperCase();
       if (couponCode === "YWIYC") {
         alert('کد تخفیف اعمال شد. شما نیازی به پرداخت ندارید!');
-        document.getElementById('step6').classList.remove('active');
-        document.getElementById('finalStep').classList.add('active');
       } else {
         alert('کد تخفیف نادرست است.');
       }
+      document.getElementById('step6').classList.remove('active');
+      document.getElementById('finalStep').classList.add('active');
     });
 
-    checkInput(1);
   </script>
 
 </body>
